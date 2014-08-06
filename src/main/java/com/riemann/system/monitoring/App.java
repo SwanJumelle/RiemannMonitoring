@@ -34,7 +34,7 @@ public class App
 			ArrayList<CpuData> cpuDataList = procP.gatherCpuUsage();
 			for(CpuData cpuData : cpuDataList){
 				System.out.println(cpuData);
-				riemannCommunicator.send("cpu", cpuData.getIdle());
+				riemannCommunicator.send("cpu", 10);
 			}
 			Thread.sleep(1000);
 		}
