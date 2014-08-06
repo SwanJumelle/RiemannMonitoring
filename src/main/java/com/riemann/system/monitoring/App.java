@@ -14,7 +14,8 @@ public class App
 	{
 		RiemannClient c = RiemannClient.tcp("10.42.2.4", 5555);
 		c.connect();
-		c.event().service("fridge").state("running").metric(5.3).tags("appliance", "cold").send();
+		for(int i=0;i<100;i++)
+			c.event().service("fridge").state("running").metric(5.3).tags("appliance", "cold").send();
 
 		c.query("tagged \"cold\" and metric > 0"); // => List<Event>;
 		c.disconnect();
