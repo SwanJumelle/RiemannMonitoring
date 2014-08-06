@@ -63,8 +63,6 @@ public class App
 				diskDataList.add(procP.gatherDiskUsage());
 				Thread.sleep(500);
 			}
-			System.out.println(totalCpuUsage(cpuDataList.get(0), cpuDataList.get(1)));
-			System.out.println(getDiskStats(diskDataList.get(0),diskDataList.get(1)));
 			riemannCommunicator.send("cpu_total_usage", totalCpuUsage(cpuDataList.get(0), cpuDataList.get(1)),"cpuUsage");
 			riemannCommunicator.send("mem_free", (memData.getMemFree()*100.0f)/memData.getMemTotal(),"mem_free");
 			riemannCommunicator.send("mem_buffers", (memData.getMemBuffers()*100.0f)/memData.getMemTotal(),"mem_buffers");
@@ -76,6 +74,7 @@ public class App
 				riemannCommunicator.send("disk_write_" + partitionName, diskUsage.get(partitionName).get(0), "disk_write_" + partitionName);
 				riemannCommunicator.send("disk_read_" + partitionName, diskUsage.get(partitionName).get(1), "disk_read_" + partitionName);
 			}
+			riemannCommunicator.send("loadavg", procP.gatherLoadAvg().getOneMinuteAvg(), "loadavg");
 		}
 	}
 }

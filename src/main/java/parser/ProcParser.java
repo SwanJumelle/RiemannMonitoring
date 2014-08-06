@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import usage.CpuData;
 import usage.DiskData;
+import usage.LoadAvgData;
 import usage.MemData;
 import utils.Utils;
 
@@ -48,6 +49,7 @@ public class ProcParser {
 	public static final String netdevPath = "/proc/net/dev";
 	public static final String partitionsPath = "/proc/partitions";
 	public static final String diskstatsPath = "/proc/diskstats";
+	public static final String loadavgPath = "/proc/loadavg";
 	public static final String EMPTY = "";
 	public static final String COLON = ":";
 	public static final String SPACE = " ";
@@ -309,5 +311,25 @@ public class ProcParser {
 		}
 		return br;
 	}
+	
+	public LoadAvgData gatherLoadAvg() {
+		BufferedReader br = null;
+		String[] tempData;
+		ArrayList<String> data = new ArrayList<String>();
+		try {
+			br = getStream(loadavgPath);
+			tempData = br.readLine().split(SPACE);
+			//Adds the first 9 fields.
+			for (int field = 0; field < 3; field++) {
+				data.add(tempData[field]);
+			}
+			br.close();
+		} catch (IOException ex) {
+			Logger.getLogger(ProcParser.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		System.out.println(data);
+		return new LoadAvgData(data);
+	}
+	
 }// end ProcInfoParser
 
