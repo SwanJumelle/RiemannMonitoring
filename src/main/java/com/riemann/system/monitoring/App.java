@@ -13,11 +13,12 @@ public class App
 	public static void main( String[] args ) throws IOException
 	{
 		RiemannClient c = RiemannClient.tcp("10.42.2.4", 5555);
-		c.connect();
-		for(int i=0;i<100;i++)
+		for(int i=0;i<100;i++){
+			c.connect();
 			c.event().service("fridge").state("running").metric(5.3).tags("appliance", "cold").send();
 
-		c.query("tagged \"cold\" and metric > 0"); // => List<Event>;
-		c.disconnect();
+			c.query("tagged \"cold\" and metric > 0"); // => List<Event>;
+			c.disconnect();
+		}
 	}
 }
