@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import parser.ProcParser;
 import usage.CpuData;
+import usage.MemData;
 import usage.UsageType;
 import utils.Utils;
 
 import com.aphyr.riemann.client.RiemannClient;
+
 import communication.RiemannCommunicator;
 
 /**
@@ -36,20 +38,20 @@ public class App
 		}
 		c.disconnect();*/
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
-		while(true){
+		//while(true){
 			ProcParser procP = new ProcParser(Utils.getPid());
 			ArrayList<CpuData> cpuDataList = new ArrayList<CpuData>();
-			//ArrayList<String> memDataList = procP.gatherMemoryUsage(Utils.getPid());
+			MemData memData = procP.gatherMemoryUsage(Utils.getPid());
 			for(int i=0;i<2;i++){
 				cpuDataList.add(procP.gatherCpuUsage());
 				Thread.sleep(2000);
 			}
 			System.out.println(totalUsage(cpuDataList.get(0), cpuDataList.get(1)));
-			riemannCommunicator.send("cpu", totalUsage(cpuDataList.get(0), cpuDataList.get(1)),"cpuUsage");
-			//for(String memData : memDataList){
-				//System.out.println(memData);
-			//}
+			riemannCommunicator.send("cpu_total_usage", totalUsage(cpuDataList.get(0), cpuDataList.get(1)),"cpuUsage");
+			riemannCommunicator.send("mem_free", (memData.getMemFree()*100.0f)/memData.getMemTotal(),"mem_free");
+			riemannCommunicator.send("mem_buffers", (memData.getMemBuffers()*100.0f)/memData.getMemTotal(),"mem_buffers");
+			riemannCommunicator.send("mem_used", (memData.getMemUsed()*100.0f)/memData.getMemTotal(),"mem_used");
 			
-		}
+		//}
 	}
 }
