@@ -17,6 +17,13 @@ import communication.RiemannCommunicator;
  */
 public class App 
 {
+	
+	public static double totalUsage(CpuData c1, CpuData c2){
+		double usage = (c2.getUser()-c1.getUser())+(c2.getNice()-c1.getNice())+(c2.getSysmode()-c1.getSysmode());
+		double total = usage + (c2.getIdle()-c1.getIdle());
+		return (100*usage)/total;
+	}
+	
 	public static void main( String[] args ) throws IOException, InterruptedException
 	{
 		/*RiemannClient c = RiemannClient.tcp("10.42.2.4", 5555);
@@ -31,12 +38,18 @@ public class App
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
 		while(true){
 			ProcParser procP = new ProcParser(Utils.getPid());
-			ArrayList<CpuData> cpuDataList = procP.gatherCpuUsage();
-			for(CpuData cpuData : cpuDataList){
-				System.out.println(cpuData);
-				riemannCommunicator.send("cpu", cpuData.getIdle());
+			ArrayList<CpuData> cpuDataList = new ArrayList<CpuData>();
+			//ArrayList<String> memDataList = procP.gatherMemoryUsage(Utils.getPid());
+			for(int i=0;i<2;i++){
+				cpuDataList.add(procP.gatherCpuUsage());
+				Thread.sleep(2000);
 			}
-			Thread.sleep(1000);
+			System.out.println(totalUsage(cpuDataList.get(0), cpuDataList.get(1)));
+			riemannCommunicator.send("cpu", totalUsage(cpuDataList.get(0), cpuDataList.get(1)),"cpuUsage");
+			//for(String memData : memDataList){
+				//System.out.println(memData);
+			//}
+			
 		}
 	}
 }
