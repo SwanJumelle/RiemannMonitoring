@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 25
+/svn/!svn/ver/6/src/usage
+END
+MemData.java
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/6/src/usage/MemData.java
+END
+MonitoredData.java
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/6/src/usage/MonitoredData.java
+END
+CpuData.java
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/6/src/usage/CpuData.java
+END
+Transmit.java
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/6/src/usage/Transmit.java
+END
+Receive.java
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/6/src/usage/Receive.java
+END
+NetworkData.java
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/6/src/usage/NetworkData.java
+END
+DiskData.java
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/6/src/usage/DiskData.java
+END
+UsageType.java
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/1/src/usage/UsageType.java
+END

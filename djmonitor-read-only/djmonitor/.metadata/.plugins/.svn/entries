@@ -1,0 +1,55 @@
+10
+
+dir
+36
+http://djmonitor.googlecode.com/svn/djmonitor/.metadata/.plugins
+http://djmonitor.googlecode.com/svn
+
+
+
+2012-08-05T23:40:38.517199Z
+28
+pmdusso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64e26325-ab82-fb8e-d708-dc073d0feb75
+
+org.eclipse.core.resources
+dir
+
+org.eclipse.team.svn.core
+dir
+
+org.eclipse.mylyn.bugzilla.core
+dir
+
+org.eclipse.ui.intro
+dir
+
+org.eclipse.jdt.core
+dir
+
+org.eclipse.core.runtime
+dir
+
+org.eclipse.jdt.ui
+dir
+
+org.eclipse.ui.ide
+dir
+
+org.eclipse.ui.workbench
+dir
+
