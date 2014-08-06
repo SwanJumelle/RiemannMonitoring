@@ -38,7 +38,7 @@ public class App
 		}
 		c.disconnect();*/
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
-		//while(true){
+		while(true){
 			ProcParser procP = new ProcParser(Utils.getPid());
 			ArrayList<CpuData> cpuDataList = new ArrayList<CpuData>();
 			MemData memData = procP.gatherMemoryUsage(Utils.getPid());
@@ -52,6 +52,6 @@ public class App
 			riemannCommunicator.send("mem_buffers", (memData.getMemBuffers()*100.0f)/memData.getMemTotal(),"mem_buffers");
 			riemannCommunicator.send("mem_used", (memData.getMemUsed()*100.0f)/memData.getMemTotal(),"mem_used");
 			
-		//}
+		}
 	}
 }
