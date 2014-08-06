@@ -29,12 +29,12 @@ public class App
 		}
 		c.disconnect();*/
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
-		for(int i=0;i<30;i++){
+		while(true){
 			ProcParser procP = new ProcParser(Utils.getPid());
 			ArrayList<CpuData> cpuDataList = procP.gatherCpuUsage();
 			for(CpuData cpuData : cpuDataList){
 				System.out.println(cpuData);
-				//riemannCommunicator.send("cpu", cpuData.getIdle());
+				riemannCommunicator.send("cpu", cpuData.getIdle());
 			}
 			Thread.sleep(1000);
 		}
