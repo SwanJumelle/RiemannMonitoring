@@ -33,7 +33,8 @@ public class App
 			ProcParser procP = new ProcParser(Utils.getPid());
 			ArrayList<CpuData> cpuDataList = procP.gatherCpuUsage();
 			for(CpuData cpuData : cpuDataList){
-				riemannCommunicator.send("cpu", cpuData.getIdle());
+				System.out.println(cpuData);
+				//riemannCommunicator.send("cpu", cpuData.getIdle());
 			}
 			Thread.sleep(1000);
 		}
