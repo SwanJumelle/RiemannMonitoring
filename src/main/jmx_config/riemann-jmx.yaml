@@ -38,7 +38,7 @@ queries :
     tags        : [ cassandra ]
 
 -   service     : "org.apache.cassandra.metrics"
-    obj         : "org.apache.cassandra.metrics:type=DroppedMessage"
+    obj         : "org.apache.cassandra.metrics:type=DroppedMessage,scope=RANGE_SLICE,name=Dropped"
     attr        : [ Count , MeanRate , OneMinuteRate , FiveMinuteRate , FifteenMinuteRate]
     tags        : [ cassandra ]
 
