@@ -36,3 +36,8 @@ queries :
     obj         : "org.apache.cassandra.internal:type=MemoryMeter"
     attr        : [ ActiveCount , CompletedTasks , PendingTasks , CoreThreads , MaximumThreads]
     tags        : [ cassandra ]
+
+-   service     : "org.apache.cassandra.db"
+    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
+    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
+    tags        : [ cassandra ]
