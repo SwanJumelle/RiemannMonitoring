@@ -28,7 +28,7 @@ riemann :
     interval : 5
 
 jmx : 
-    host : 10.42.2.1
+    host : testdev-db-00
     port : 7199
 
 queries : 
