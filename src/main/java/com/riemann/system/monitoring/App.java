@@ -52,7 +52,7 @@ public class App
 			Thread.sleep(1000);
 		}
 		c.disconnect();*/
-		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
+		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.6");
 		while(true){
 			ProcParser procP = new ProcParser(Utils.getPid());
 			ArrayList<CpuData> cpuDataList = new ArrayList<CpuData>();
