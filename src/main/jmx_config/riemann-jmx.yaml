@@ -32,7 +32,7 @@ jmx :
     port : 7199
 
 queries : 
--   service     : "org.apache.cassandra.db"
-    obj         : "cassandra:type=cassandra.CommitLog"
-    attr        : [ ActiveCount , CompletedTasks , PendingTasks ]
+-   service     : "org.apache.cassandra.internal"
+    obj         : "org.apache.cassandra.internal:type=MemoryMeter"
+    attr        : [ ActiveCount , CompletedTasks , PendingTasks , CoreThreads , MaximumThreads]
     tags        : [ cassandra ]
