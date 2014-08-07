@@ -327,7 +327,6 @@ public class ProcParser {
 		} catch (IOException ex) {
 			Logger.getLogger(ProcParser.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		System.out.println(data);
 		return new LoadAvgData(data);
 	}
 	
