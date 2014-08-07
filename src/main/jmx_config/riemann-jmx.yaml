@@ -37,7 +37,13 @@ queries :
     attr        : [ ActiveCount , CompletedTasks , PendingTasks , CoreThreads , MaximumThreads]
     tags        : [ cassandra ]
 
--   service     : "org.apache.cassandra.db"
-    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
-    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
+-   service     : "org.apache.cassandra.metrics"
+    obj         : "org.apache.cassandra.metrics:type=DroppedMessage"
+    attr        : [ Count , MeanRate , OneMinuteRate , FiveMinuteRate , FifteenMinuteRate]
     tags        : [ cassandra ]
+
+
+#-   service     : "org.apache.cassandra.db"
+#    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
+#    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
+#    tags        : [ cassandra ]
