@@ -42,7 +42,7 @@ public class App
 
 	public static void main( String[] args )
 	{
-		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.4");
+		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.6");
 		DataSender dataSender = new DataSender(riemannCommunicator);
 
 		try {
