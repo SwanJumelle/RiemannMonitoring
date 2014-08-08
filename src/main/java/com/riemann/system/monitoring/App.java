@@ -40,13 +40,13 @@ public class App
 
 		DataSender dataSender = new DataSender(riemannCommunicator);
 		
-		while(true){
+		/*while(true){
 			dataSender.printData();
-			/*try {
+			try {
 				//dataSender.sendData();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
-			}*/
-		}
+			}
+		}*/
 	}
 }
