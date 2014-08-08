@@ -64,7 +64,7 @@ queries :
 #    tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
 
 -   service     : "org.apache.cassandra.metrics"
-    obj         : "org.apache.cassandra.metrics ClientRequest Write Latency"
+    obj         : "org.apache.cassandra.metrics ClientRequest Write Latency .95"
     attr        : [ Mean ]
 #-   service     : "org.apache.cassandra.db"
 #    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
