@@ -30,8 +30,7 @@ riemann :
 jmx : 
     host : testdev-db-00
     port : 7199
-
-org.apache.cassandra.metrics:type=ThreadPools,path=internal,scope=AntiEntropyStage,name=ActiveTasks
+    
 queries : 
 -   service     : "org.apache.cassandra.metrics"
     obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
