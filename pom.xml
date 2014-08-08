@@ -12,6 +12,11 @@
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+        <repository>
+            <id>Sonatype-public</id>
+            <name>SnakeYAML repository</name>
+            <url>http://oss.sonatype.org/content/groups/public/</url>
+        </repository>
 	</repositories>
 
 	<name>monitoring</name>
@@ -33,6 +38,11 @@
 			<artifactId>riemann-java-client</artifactId>
 			<version>0.2.10</version>
 		</dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.9</version>
+        </dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
