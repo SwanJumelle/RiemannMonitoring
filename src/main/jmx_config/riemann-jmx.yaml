@@ -37,7 +37,7 @@ queries :
     attr        : [ TotalCommitlogSize ]
     tags        : [ cassandra , Commitlog ]
 
--   service     : "org.apache.cassandra.db"
+-   service     : "rg.apache.cassandra.db:type=ColumnFamilies,keyspace=system,columnfamily=IndexInfo"
     obj         : "org.apache.cassandra.db:type=ColumnFamilies,keyspace=system,columnfamily=IndexInfo"
     attr        : [ MemtableDataSize , MinRowSize , MaxRowSize , MeanRowSize ]
     tags        : [ cassandra , Commitlog ]
