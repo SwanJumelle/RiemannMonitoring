@@ -32,31 +32,40 @@ jmx :
     port : 7199
 
 queries : 
+-   service     : "org.apache.cassandra.db"
+    obj         : "org.apache.cassandra.db:type=Commitlog"
+    attr        : [ TotalCommitlogSize ]
+    tags        : [ cassandra , Commitlog ]
+
+#-   service     : "rg.apache.cassandra.db:type=ColumnFamilies,*"
+#    obj         : "org.apache.cassandra.db:type=ColumnFamilies,*"
+#    attr        : [ MemtableDataSize , MinRowSize , MaxRowSize , MeanRowSize ]
+#    tags        : [ cassandra , ColumnFamilies ]
+
+#-   service     : "org.apache.cassandra.metrics"
+#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
+#    attr        : [ Value ]
+#    tags        : [ cassandra , ThreadPools, ActiveTasks ]
+
+#-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
+#    attr        : [ Value ]
+#    tags        : [ cassandra , ThreadPools, PendingTasks ]
+
+#-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
+#    attr        : [ Count ]
+#    tags        : [ cassandra , ThreadPools, BlockedTasks ]
+
+#-   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=AllMemtablesDataSize"
+#    attr        : [ Value ]
+#    tags        : [ cassandra , Keyspace, AllMemtablesDataSize ]
+
+#-   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=LiveDiskSpaceUsed"
+#    attr        : [ Value ]
+#    tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
+
 -   service     : "org.apache.cassandra.metrics"
-    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
-    attr        : [ Value ]
-    tags        : [ cassandra , ThreadPools, ActiveTasks ]
-
--   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
-    attr        : [ Value ]
-    tags        : [ cassandra , ThreadPools, PendingTasks ]
-
--   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
-    attr        : [ Count ]
-    tags        : [ cassandra , ThreadPools, BlockedTasks ]
-
--   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=AllMemtablesDataSize"
-    attr        : [ Value ]
-    tags        : [ cassandra , Keyspace, AllMemtablesDataSize ]
-
--   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=LiveDiskSpaceUsed"
-    attr        : [ Value ]
-    tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
-
--   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
-    attr        : [ Min , Mean , Max , Count ]
-    tags        : [ cassandra , Keyspace, ReadLatency ]
-
+    obj         : "org.apache.cassandra.metrics ClientRequest Write Latency .95"
+    attr        : [ Mean ]
 #-   service     : "org.apache.cassandra.db"
 #    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
 #    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
