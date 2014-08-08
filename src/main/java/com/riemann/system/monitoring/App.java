@@ -1,49 +1,52 @@
 package com.riemann.system.monitoring;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
-import parser.ProcParser;
-import usage.CpuData;
-import usage.DiskData;
-import usage.MemData;
-import utils.Utils;
+import org.apache.commons.cli.Options;
 import communication.RiemannCommunicator;
-
+import communication.RiemannJmx;
 /**
  * Hello world!
  *
  */
 public class App 
 {
+	private static Options options = null;
 
-	public static double totalCpuUsage(CpuData c1, CpuData c2){
-		double usage = (c2.getUser()-c1.getUser())+(c2.getNice()-c1.getNice())+(c2.getSysmode()-c1.getSysmode());
-		double total = usage + (c2.getIdle()-c1.getIdle());
-		return (100*usage)/total;
-	}
+    static
+    {
+        options = new Options();
 
-	private static HashMap<String,ArrayList<Double>> getDiskStats(ArrayList<DiskData> dList1, ArrayList<DiskData> dList2) {
-		int size = dList1.size();
-		HashMap<String,ArrayList<Double>> map = new HashMap<String, ArrayList<Double>>();
-		for(int i = 0; i<size;i++){
-			double write = dList2.get(i).getWritesCompleted()-dList1.get(i).getWritesCompleted();
-			double read = dList2.get(i).getReadsCompleted()-dList1.get(i).getReadsCompleted();
-			ArrayList<Double> rw = new ArrayList<Double>();
-			rw.add(write);
-			rw.add(read);
-			map.put(dList1.get(i).getName(), rw);
-		}
-
-		return map;
-	}
+        options.addOption("riemann_host", true, "hostname for riemann server");
+        options.addOption("riemann_port", true, "port number for riemann server");
+        options.addOption("interval_seconds", true, "number of seconds between updates");
+    }
 
 	public static void main( String[] args )
 	{
-		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.6");
+		//processus of rieamann-jmx
+		final Process rJmxJar = null;
+		//communication between the java process and riemann
+		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.6",5555);
+
+		final RiemannJmx rJmx = new RiemannJmx(rJmxJar);
+
+		try {
+			rJmx.gatherStats(args);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		//hook on kill, to also kill riemann-jmx
+		Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                rJmx.destroy();
+            }
+        });
+
 		DataSender dataSender = new DataSender(riemannCommunicator);
+		
 		while(true){
 			//dataSender.printData();
 			try {
