@@ -1,6 +1,7 @@
 package com.riemann.system.monitoring;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import communication.RiemannCommunicator;
 import communication.RiemannJmx;
@@ -14,29 +15,13 @@ public class App
 
 	public static void main( String[] args )
 	{
-		String riemannHost = args[0];
-		int riemannPort = Integer.parseInt(args[1]);
-		//processus of rieamann-jmx
-		final Process rJmxJar = null;
+		String riemannHost = "10.42.2.6";
+		int riemannPort = 5555;
 		//communication between the java process and riemann
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator(riemannHost,riemannPort);
-
-		final RiemannJmx rJmx = new RiemannJmx(rJmxJar);
-
-		try {
-			rJmx.gatherStats(args);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		//hook on kill, to also kill riemann-jmx
-		Runtime.getRuntime().addShutdownHook(new Thread()
-        {
-            @Override
-            public void run()
-            {
-                rJmx.destroy();
-            }
-        });
+		//gather jmx stats
+		final RiemannJmx rJmx = new RiemannJmx();
+		rJmx.gatherStats();
 
 		DataSender dataSender = new DataSender(riemannCommunicator);
 		

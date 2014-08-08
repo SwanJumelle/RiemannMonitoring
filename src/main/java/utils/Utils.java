@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -112,7 +113,7 @@ public class Utils {
 		return null;
 
 	}
-	
+
 	public static double totalCpuUsage(CpuData c1, CpuData c2){
 		double usage = (c2.getUser()-c1.getUser())+(c2.getNice()-c1.getNice())+(c2.getSysmode()-c1.getSysmode());
 		double total = usage + (c2.getIdle()-c1.getIdle());
@@ -132,5 +133,19 @@ public class Utils {
 		}
 
 		return map;
+	}
+
+	public static ArrayList<String> getYamlFiles(String path){
+		ArrayList<String> filesName = new ArrayList<String>();
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				filesName.add(path+listOfFiles[i].getName());
+			}
+		}
+		
+		return filesName;
 	}
 }
