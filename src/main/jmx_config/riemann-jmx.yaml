@@ -53,10 +53,15 @@ queries :
     attr        : [ Value ]
     tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
 
--   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
+-   service     : "org.apache.cassandra.metrics"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
     attr        : [ Min , Mean , Max , Count ]
     tags        : [ cassandra , Keyspace, ReadLatency ]
 
+-   service     : "org.apache.cassandra.db"
+    obj         : "org.apache.cassandra.metrics:type=CommitLog"
+    attr        : [ TotalCommitlogSize ]
+    tags        : [ cassandra , CommitLog ]
 #-   service     : "org.apache.cassandra.db"
 #    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
 #    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
