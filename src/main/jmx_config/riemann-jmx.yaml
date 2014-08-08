@@ -63,7 +63,7 @@ queries :
     attr        : [ Value ]
     tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
 
-    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace"
     attr        : [ Min , Mean , Max , Count ]
     tags        : [ cassandra , Keyspace, ReadLatency ]
 
