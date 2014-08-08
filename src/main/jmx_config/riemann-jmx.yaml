@@ -59,7 +59,7 @@ queries :
     tags        : [ cassandra , Keyspace, ReadLatency ]
 
 -   service     : "org.apache.cassandra.db"
-    obj         : "org.apache.cassandra.metrics:type=CommitLog"
+    obj         : "org.apache.cassandra.db:type=CommitLog"
     attr        : [ TotalCommitlogSize ]
     tags        : [ cassandra , CommitLog ]
 #-   service     : "org.apache.cassandra.db"
