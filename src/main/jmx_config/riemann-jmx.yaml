@@ -31,13 +31,20 @@ jmx :
     host : testdev-db-00
     port : 7199
 
+org.apache.cassandra.metrics:type=ThreadPools,path=internal,scope=AntiEntropyStage,name=ActiveTasks
 queries : 
 -   service     : "org.apache.cassandra.metrics"
-    obj         : "org.apache.cassandra.metrics:type=ThreadPools,*"
-    attr        : [ ActiveTasks , PendingTasks , CurrentlyBlockedTasks ]
-    tags        : [ cassandra ]
+    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
+    attr        : [ Value ]
+    tags        : [ cassandra , ThreadPools, ActiveTasks ]
 
+-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
+    attr        : [ Value ]
+    tags        : [ cassandra , ThreadPools, PendingTasks ]
 
+-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
+    attr        : [ Count ]
+    tags        : [ cassandra , ThreadPools, BlockedTasks ]
 
 #-   service     : "org.apache.cassandra.db"
 #    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
