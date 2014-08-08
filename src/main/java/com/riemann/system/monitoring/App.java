@@ -1,32 +1,25 @@
 package com.riemann.system.monitoring;
 
 import java.io.IOException;
-import org.apache.commons.cli.Options;
+
 import communication.RiemannCommunicator;
 import communication.RiemannJmx;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-	private static Options options = null;
-
-    static
-    {
-        options = new Options();
-
-        options.addOption("riemann_host", true, "hostname for riemann server");
-        options.addOption("riemann_port", true, "port number for riemann server");
-        options.addOption("interval_seconds", true, "number of seconds between updates");
-    }
 
 	public static void main( String[] args )
 	{
+		String riemannHost = args[0];
+		int riemannPort = Integer.parseInt(args[1]);
 		//processus of rieamann-jmx
 		final Process rJmxJar = null;
 		//communication between the java process and riemann
-		RiemannCommunicator riemannCommunicator = new RiemannCommunicator("10.42.2.6",5555);
+		RiemannCommunicator riemannCommunicator = new RiemannCommunicator(riemannHost,riemannPort);
 
 		final RiemannJmx rJmx = new RiemannJmx(rJmxJar);
 
@@ -48,12 +41,12 @@ public class App
 		DataSender dataSender = new DataSender(riemannCommunicator);
 		
 		while(true){
-			//dataSender.printData();
-			try {
-				dataSender.sendData();
+			dataSender.printData();
+			/*try {
+				//dataSender.sendData();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 }
