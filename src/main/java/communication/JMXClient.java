@@ -1,13 +1,11 @@
 package communication;
 
-import sun.jvm.hotspot.HelloWorld;
-
 import javax.management.*;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by antoinelavail on 11/08/14.
@@ -25,21 +23,31 @@ public class JMXClient {
     mbsc = jmxc.getMBeanServerConnection();
   }
 
-  public Object getJMXValue(String mbeanStringName, String attribute) {
+  public Map<String, Object> getJMXValues(String queryMBeanName, List<String> attributes) {
 
-    ObjectName mbeanName = null;
+    Map<String, Object> jmxValues = new HashMap<String, Object>();
+
+    final List<String> matchedMBeans = new ArrayList<String>();
     try {
-      mbeanName = new ObjectName(mbeanStringName);
-    } catch (MalformedObjectNameException e) {
+      // Query the mbean to get all the instances
+      final Set<ObjectInstance> matchingMBeans = mbsc.queryMBeans(new ObjectName(queryMBeanName), null);
+      for (final ObjectInstance mbean : matchingMBeans ) {
+        // Gather the mbeans found
+        matchedMBeans.add(mbean.getObjectName().getCanonicalName());
+      }
+
+      // For all attributes, retrieve the corresponding MBean value
+      for (String attr : attributes) {
+        Float valf = 0.0f;
+        for (String strMBean : matchedMBeans) {
+          Object val = mbsc.getAttribute(new ObjectName(strMBean),attr);
+          valf += Float.valueOf(val.toString());
+        }
+        jmxValues.put(attr, valf);
+      }
+    } catch (Exception e) {
       e.printStackTrace();
     }
-    Object value = null;
-      try {
-        value = mbsc.getAttribute(mbeanName, attribute);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    System.out.println(value.toString());
-    return value;
+    return jmxValues;
   }
 }

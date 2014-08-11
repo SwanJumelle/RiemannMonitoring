@@ -2,11 +2,7 @@ package com.riemann.system.monitoring;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import parser.ProcParser;
 import usage.CpuData;
@@ -61,10 +57,10 @@ public class DataSender {
 		riemannCommunicator.send("loadavg", procP.gatherLoadAvg().getOneMinuteAvg(), "loadavg");
 
 		for (JMXData jmxData : jmxDataList) {
-      Iterator iterator = jmxData.getValues().values().iterator();
+      Iterator<Map.Entry<String, Object>> iterator = jmxData.getValues().entrySet().iterator();
       while (iterator.hasNext()) {
-        Object value = iterator.next();
-        riemannCommunicator.send(jmxData.getName(), (Double) value, jmxData.getTagsAsString());
+        Map.Entry<String, Object> entry = iterator.next();
+        riemannCommunicator.send(jmxData.getName() + '.' + entry.getKey(), (Float) entry.getValue(), jmxData.getTagsAsString());
       }
 		}
 	}

@@ -27,42 +27,78 @@ jmx :
     port : 7199
 
 queries :
--   name        : "cassandra.db.Commitlog"
-    obj         : "org.apache.cassandra.db:type=Commitlog"
-    attr        : [ TotalCommitlogSize ]
-    tags        : [ cassandra , Commitlog ]
 
-#-   name        : "cassandra.metrics.threadPools"
-#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
-#    attr        : [ Value ]
-#    tags        : [ cassandra , ThreadPools, ActiveTasks ]
+-   name        : "cassandra.metrics.ClientRequestMetrics.ReadTimeouts"
+    obj         : "org.apache.cassandra.metrics:type=ClientRequestMetrics,name=ReadTimeouts"
+    attr        : [ Count ]
+    tags        : [ cassandra , ClientRequestMetrics, ReadTimeouts ]
 
+-   name        : "cassandra.metrics.ClientRequestMetrics.ReadUnavailables"
+    obj         : "org.apache.cassandra.metrics:type=ClientRequestMetrics,name=ReadUnavailables"
+    attr        : [ Count ]
+    tags        : [ cassandra , ClientRequestMetrics, ReadUnavailables ]
 
-#-   name        : "cassandra.metrics.threadPools"
-#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
-#    attr        : [ Value ]
-#    tags        : [ cassandra , ThreadPools, PendingTasks ]
+-   name        : "cassandra.metrics.ClientRequestMetrics.WriteTimeouts"
+    obj         : "org.apache.cassandra.metrics:type=ClientRequestMetrics,name=WriteTimeouts"
+    attr        : [ Count ]
+    tags        : [ cassandra , ClientRequestMetrics, WriteTimeouts ]
 
-#-   name        : "cassandra.metrics.threadPools"
-#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
-#    attr        : [ Count ]
-#    tags        : [ cassandra , ThreadPools, BlockedTasks ]
+-   name        : "cassandra.metrics.ClientRequestMetrics.WriteUnavailables"
+    obj         : "org.apache.cassandra.metrics:type=ClientRequestMetrics,name=WriteUnavailables"
+    attr        : [ Count ]
+    tags        : [ cassandra , ClientRequestMetrics, WriteUnavailables ]
 
-#-   service     : "org.apache.cassandra.db:type=ColumnFamilies,*"
-#    obj         : "org.apache.cassandra.db:type=ColumnFamilies,*"
-#    attr        : [ MemtableDataSize , MinRowSize , MaxRowSize , MeanRowSize ]
-#    tags        : [ cassandra , ColumnFamilies ]
+-   name        : "cassandra.metrics.Keyspace.Connection.TotalTimeouts"
+    obj         : "org.apache.cassandra.metrics:type=Connection,keyspace=*,name=TotalTimeouts"
+    attr        : [ OneMinuteRate, FiveMinuteRate, FifteenMinuteRate ]
+    tags        : [ cassandra , Keyspace, PendingTasks ]
 
-#-   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=AllMemtablesDataSize"
-#    attr        : [ Value ]
-#    tags        : [ cassandra , Keyspace, AllMemtablesDataSize ]
+-   name        : "cassandra.db.ColumnFamilies.All"
+    obj         : "org.apache.cassandra.db:type=ColumnFamilies,*"
+    attr        : [ MemtableDataSize , MemtableColumnsCount , MinRowSize , MaxRowSize , MeanRowSize , LiveSSTableCount , RecentReadLatencyMicros , RecentWriteLatencyMicros , LiveDiskSpaceUsed , RecentBloomFilterFalseRatio , BloomFilterDiskSpaceUsed ]
+    tags        : [ cassandra , ColumnFamilies ]
 
-#-   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=LiveDiskSpaceUsed"
-#    attr        : [ Value ]
-#    tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
+-   name        : "cassandra.db.DroppedMessage"
+    obj         : "org.apache.cassandra.metrics:type=DroppedMessage,scope=*,name=Dropped"
+    attr        : [ OneMinuteRate, FiveMinuteRate, FifteenMinuteRate ]
+    tags        : [ cassandra , DroppedMessage ]
 
-#-   service     : "org.apache.cassandra.db"
-#    obj         : "org.apache.cassandra.db:type=ColumnFamilies"
-#    attr        : [ MeanRowSize , MinRowSize , MaxRowSize , SSTableCountPerLevel , ReadCount , WriteCount , MemtableColumnsCount , MemtableDataSize , LiveDiskSpaceUsed]
-#    tags        : [ cassandra ]
+-   name        : "cassandra.metrics.threadPools.ActiveTasks"
+    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
+    attr        : [ Value ]
+    tags        : [ cassandra , ThreadPools, ActiveTasks ]
 
+-   name        : "cassandra.metrics.threadPools.PendingTasks"
+    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
+    attr        : [ Value ]
+    tags        : [ cassandra , ThreadPools, PendingTasks ]
+
+-   name        : "cassandra.metrics.threadPools.BlockedTasks"
+    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
+    attr        : [ Count ]
+    tags        : [ cassandra , ThreadPools, BlockedTasks ]
+
+-   name        : "cassandra.metrics.Keyspace.All.MemtablesDataSize"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=AllMemtablesDataSize"
+    attr        : [ Value ]
+    tags        : [ cassandra , Keyspace, AllMemtablesDataSize ]
+
+-   name        : "cassandra.metrics.Keyspace.All.LiveDiskSpaceUsed"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=LiveDiskSpaceUsed"
+    attr        : [ Value ]
+    tags        : [ cassandra , Keyspace, LiveDiskSpaceUsed ]
+
+-   name        : "cassandra.metrics.Keyspace.All.PendingTasks"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=PendingTasks"
+    attr        : [ Value ]
+    tags        : [ cassandra , Keyspace, PendingTasks ]
+
+-   name        : "cassandra.metrics.Keyspace.All.WriteLatency"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=WriteLatency"
+    attr        : [ OneMinuteRate, FiveMinuteRate, FifteenMinuteRate ]
+    tags        : [ cassandra , Keyspace, WriteLatency ]
+
+-   name        : "cassandra.metrics.Keyspace.All.ReadLatency"
+    obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
+    attr        : [ OneMinuteRate, FiveMinuteRate, FifteenMinuteRate ]
+    tags        : [ cassandra , Keyspace, PendingTasks ]

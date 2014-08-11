@@ -1,6 +1,7 @@
 package usage;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +11,6 @@ import java.util.Map;
 public class JMXData {
 
   private String name;
-
-  private String service;
 
   private String objectName;
 
@@ -44,6 +43,10 @@ public class JMXData {
     values.put(attr, value);
   }
 
+  public void setValues(Map<String, Object> vals) {
+    values = vals;
+  }
+
   public Map<String, Object> getValues() {
     return values;
   }
@@ -62,6 +65,17 @@ public class JMXData {
 
   public String getTagsAsString() {
     return tags.toString();
+  }
+
+  @Override
+  public String toString() {
+    String str = "name: " + name + "\nobjectName: " + objectName;
+    Iterator<Map.Entry<String,Object>> iterator = values.entrySet().iterator();
+    while (iterator.hasNext()) {
+      Map.Entry<String, Object> entry = iterator.next();
+      str += "\nattribute: " + entry.getKey() + "\t value: " + entry.getValue();
+    }
+    return str;
   }
 
 }

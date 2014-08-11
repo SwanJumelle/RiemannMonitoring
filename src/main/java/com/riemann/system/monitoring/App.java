@@ -1,6 +1,7 @@
 package com.riemann.system.monitoring;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import parser.YamlParser;
@@ -8,6 +9,8 @@ import communication.RiemannCommunicator;
 import communication.RiemannJmx;
 import usage.JMXData;
 import utils.Utils;
+
+import javax.management.JMX;
 
 /**
  * Hello world!
@@ -39,18 +42,15 @@ public class App
 		//final RiemannJmx rJmx = new RiemannJmx();
 		//rJmx.gatherStats();
 
-
-    List<JMXData> jmxDataList = Utils.getJmxDataList("resources/data/");
-
 		DataSender dataSender = new DataSender(riemannCommunicator);
 		
-		/*while(true){
+		while(true){
 			//dataSender.printData();
 			try {
 				dataSender.sendData();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 }

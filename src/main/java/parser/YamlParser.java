@@ -1,11 +1,9 @@
 package parser;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.aphyr.riemann.Proto;
 import communication.JMXClient;
 import org.yaml.snakeyaml.Yaml;
 import usage.JMXData;
@@ -53,12 +51,12 @@ public class YamlParser {
       List<LinkedHashMap<String, Object>> queries = (List<LinkedHashMap<String, Object>>) data.get("queries");
 
       for (LinkedHashMap<String, Object> query : queries) {
-        JMXData jmxData = new JMXData((String) query.get("name"), (String) query.get("obj"));
 
         List<String> attributes = (List<String>) query.get("attr");
-        for (String attr : attributes) {
-          jmxData.addValue(attr, jmxClient.getJMXValue(jmxData.getObjectName(), attr));
-        }
+        Map<String,Object> values = jmxClient.getJMXValues((String) query.get("obj"), attributes);
+
+        JMXData jmxData = new JMXData((String) query.get("name"), (String) query.get("obj"));
+        jmxData.setValues(values);
         jmxData.setTags((List<String>) query.get("tags"));
 
         jmxDataList.add(jmxData);
