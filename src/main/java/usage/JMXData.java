@@ -22,7 +22,7 @@ public class JMXData {
   /**
    * Build a JMXData from a
    */
-  public JMXData() {
+  public JMXData(String name, String service, String objectName) {
 
   }
 
@@ -38,12 +38,28 @@ public class JMXData {
     return objectName;
   }
 
+  public void addAttribute(String attr) {
+    attributes.add(attr);
+  }
+
   public List<String> getAttributes() {
     return attributes;
   }
 
+  public void setAttributes(List<String> attrs) {
+    attributes = attrs;
+  }
+
+  public void addTag(String tag) {
+    tags.add(tag);
+  }
+
   public List<String> getTags() {
     return tags;
+  }
+
+  public void setTags(List<String> tags) {
+    this.tags = tags;
   }
 
   public String getTagsAsString() {
@@ -52,5 +68,9 @@ public class JMXData {
 
   public Object getValue() {
     return value;
+  }
+
+  public void setValue(Object val) {
+    value = val;
   }
 }
