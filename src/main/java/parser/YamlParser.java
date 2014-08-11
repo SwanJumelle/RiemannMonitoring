@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
+import usage.JMXData;
 
 public class YamlParser {
 	
@@ -32,5 +34,8 @@ public class YamlParser {
 	public int getPort() {
 		return ((Map<String, Integer>) data.get("riemann")).get("port");
 	}
-	
+
+  public List<JMXData> gatherJMXStats() {
+    return null;
+  }
 }
