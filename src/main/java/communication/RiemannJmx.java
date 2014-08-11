@@ -3,6 +3,7 @@ package communication;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import usage.JMXData;
 import utils.Utils;
 
 public class RiemannJmx {
@@ -37,12 +38,14 @@ public class RiemannJmx {
 	}
 
 	public void gatherStats() {
-		ArrayList<String> ymlFiles = Utils.getYamlFiles(configFilePath);
+		ArrayList<JMXData> ymlFiles = Utils.getJmxDataList(configFilePath);
 		if(ymlFiles.isEmpty()){
 			//log no config files to load: no data will be tracked by jmx
 			return;
 		}
-		
+		for(int i = 0; i < ymlFiles.size(); i++){
+			
+		}
 	}
 
 }

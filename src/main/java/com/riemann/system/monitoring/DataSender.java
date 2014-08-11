@@ -1,27 +1,27 @@
 package com.riemann.system.monitoring;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
-import communication.RiemannCommunicator;
 import parser.ProcParser;
-import parser.YamlParser;
 import usage.CpuData;
 import usage.DiskData;
 import usage.JMXData;
 import usage.MemData;
 import utils.Utils;
 
-import javax.management.JMX;
+import communication.RiemannCommunicator;
 
 public class DataSender {
 
 	private static final int SEND_INTERVAL_TIME = 2000;
 
-  private static final String DEFAULT_DATA_FILES = "src/main/jmx_config/";
+	private static final String DEFAULT_DATA_FILES = "src/main/jmx_config/";
 
 	private RiemannCommunicator riemannCommunicator;
 
@@ -45,20 +45,7 @@ public class DataSender {
 			}
 		}
 
-    List<JMXData> jmxDataList = new ArrayList<JMXData>();
-    // Parse all the .yaml files
-    YamlParser parsedYaml = null;
-    File yamlFolder = new File(DEFAULT_DATA_FILES);
-    for (final File fileEntry : yamlFolder.listFiles()) {
-      String fileExtension = fileEntry.getName().substring(fileEntry.getName().lastIndexOf('.'));
-      if (fileExtension.equals("yaml") || fileExtension.equals("yml")) {
-        try {
-          parsedYaml = new YamlParser(DEFAULT_DATA_FILES + fileEntry.getName());
-          jmxDataList.addAll(parsedYaml.gatherJMXStats());
-        } catch (FileNotFoundException e) {
-        }
-      }
-    }
+		List<JMXData> jmxDataList = Utils.getJmxDataList(DEFAULT_DATA_FILES);
 
 		riemannCommunicator.send("cpu_total_usage", Utils.totalCpuUsage(cpuDataList.get(0), cpuDataList.get(1)),"cpuUsage");
 		riemannCommunicator.send("mem_free", (memData.getMemFree()*100.0f)/memData.getMemTotal(),"mem_free");
@@ -73,9 +60,9 @@ public class DataSender {
 		}
 		riemannCommunicator.send("loadavg", procP.gatherLoadAvg().getOneMinuteAvg(), "loadavg");
 
-    for (JMXData jmxData : jmxDataList) {
-      riemannCommunicator.send(jmxData.getName(), Double.parseDouble(jmxData.getValue().toString()), jmxData.getTagsAsString());
-    }
+		for (JMXData jmxData : jmxDataList) {
+			riemannCommunicator.send(jmxData.getName(), Double.parseDouble(jmxData.getValue().toString()), jmxData.getTagsAsString());
+		}
 	}
 
 	public void printData(){

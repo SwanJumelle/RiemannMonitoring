@@ -2,6 +2,7 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -13,8 +14,10 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import parser.YamlParser;
 import usage.CpuData;
 import usage.DiskData;
+import usage.JMXData;
 
 /**
  * 
@@ -135,17 +138,22 @@ public class Utils {
 		return map;
 	}
 
-	public static ArrayList<String> getYamlFiles(String path){
-		ArrayList<String> filesName = new ArrayList<String>();
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				filesName.add(path+listOfFiles[i].getName());
+	public static ArrayList<JMXData> getJmxDataList(String path){
+		ArrayList<JMXData> jmxDataList = new ArrayList<JMXData>();
+		// Parse all the .yaml files
+		YamlParser parsedYaml = null;
+		File yamlFolder = new File(path);
+		for (final File fileEntry : yamlFolder.listFiles()) {
+			String fileExtension = fileEntry.getName().substring(fileEntry.getName().lastIndexOf('.'));
+			if (fileExtension.equals("yaml") || fileExtension.equals("yml")) {
+				try {
+					parsedYaml = new YamlParser(path + fileEntry.getName());
+					jmxDataList.addAll(parsedYaml.gatherJMXStats());
+				} catch (FileNotFoundException e) {
+				}
 			}
 		}
-		
-		return filesName;
+
+		return jmxDataList;
 	}
 }
