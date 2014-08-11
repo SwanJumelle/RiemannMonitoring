@@ -22,11 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-riemann : 
-    host     : 10.42.2.6
-    port     : 5555
-    interval : 5
-
 jmx : 
     host : testdev-db-00
     port : 7199

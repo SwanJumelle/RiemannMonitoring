@@ -145,7 +145,7 @@ public class Utils {
 		File yamlFolder = new File(path);
 		for (final File fileEntry : yamlFolder.listFiles()) {
 			String fileExtension = fileEntry.getName().substring(fileEntry.getName().lastIndexOf('.'));
-			if (fileExtension.equals("yaml") || fileExtension.equals("yml")) {
+			if (fileExtension.equals(".yaml") || fileExtension.equals(".yml")) {
 				try {
 					parsedYaml = new YamlParser(path + fileEntry.getName());
 					jmxDataList.addAll(parsedYaml.gatherJMXStats());

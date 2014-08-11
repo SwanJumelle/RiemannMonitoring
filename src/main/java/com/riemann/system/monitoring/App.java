@@ -28,15 +28,17 @@ public class App
 			riemannHost = "10.42.2.6";
 			riemannPort = 5555;
 		}
-		
-		//communication between the java process and riemann
+    System.out.println("COUCOU");
+    //communication between the java process and riemann
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator(riemannHost,riemannPort);
 		
 		//gather jmx stats
-		final RiemannJmx rJmx = new RiemannJmx();
-		rJmx.gatherStats();
+		//final RiemannJmx rJmx = new RiemannJmx();
+		//rJmx.gatherStats();
 
 		DataSender dataSender = new DataSender(riemannCommunicator);
+
+    dataSender.hackJMX();
 		
 		/*while(true){
 			//dataSender.printData();

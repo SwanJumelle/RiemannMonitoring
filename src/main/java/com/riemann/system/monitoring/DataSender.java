@@ -95,6 +95,10 @@ public class DataSender {
 		}
 		System.out.println("loadavg " + procP.gatherLoadAvg().getOneMinuteAvg());
 
-	}
+    List<JMXData> jmxDataList = Utils.getJmxDataList(DEFAULT_DATA_FILES);
 
+    for (JMXData jmxData : jmxDataList) {
+      System.out.println("Name: " + jmxData.getName() + "Value: " + jmxData.getValue().toString());
+    }
+	}
 }
