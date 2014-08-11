@@ -27,29 +27,31 @@ jmx :
     port : 7199
 
 queries :
--   name:       : "cassandra.db.Commitlog"
-    service     : "org.apache.cassandra.db"
+-   name        : "cassandra.db.Commitlog"
     obj         : "org.apache.cassandra.db:type=Commitlog"
     attr        : [ TotalCommitlogSize ]
     tags        : [ cassandra , Commitlog ]
 
-#-   service     : "rg.apache.cassandra.db:type=ColumnFamilies,*"
-#    obj         : "org.apache.cassandra.db:type=ColumnFamilies,*"
-#    attr        : [ MemtableDataSize , MinRowSize , MaxRowSize , MeanRowSize ]
-#    tags        : [ cassandra , ColumnFamilies ]
-
-#-   service     : "org.apache.cassandra.metrics"
+#-   name        : "cassandra.metrics.threadPools"
 #    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=ActiveTasks"
 #    attr        : [ Value ]
 #    tags        : [ cassandra , ThreadPools, ActiveTasks ]
 
-#-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
+
+#-   name        : "cassandra.metrics.threadPools"
+#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=PendingTasks"
 #    attr        : [ Value ]
 #    tags        : [ cassandra , ThreadPools, PendingTasks ]
 
-#-   obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
+#-   name        : "cassandra.metrics.threadPools"
+#    obj         : "org.apache.cassandra.metrics:type=ThreadPools,path=*,scope=*,name=CurrentlyBlockedTasks"
 #    attr        : [ Count ]
 #    tags        : [ cassandra , ThreadPools, BlockedTasks ]
+
+#-   service     : "org.apache.cassandra.db:type=ColumnFamilies,*"
+#    obj         : "org.apache.cassandra.db:type=ColumnFamilies,*"
+#    attr        : [ MemtableDataSize , MinRowSize , MaxRowSize , MeanRowSize ]
+#    tags        : [ cassandra , ColumnFamilies ]
 
 #-   obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=AllMemtablesDataSize"
 #    attr        : [ Value ]

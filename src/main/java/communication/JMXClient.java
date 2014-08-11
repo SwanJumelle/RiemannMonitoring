@@ -1,12 +1,13 @@
 package communication;
 
-import javax.management.MBeanServerConnection;
+import sun.jvm.hotspot.HelloWorld;
+
+import javax.management.*;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by antoinelavail on 11/08/14.
@@ -24,7 +25,21 @@ public class JMXClient {
     mbsc = jmxc.getMBeanServerConnection();
   }
 
-  public Object getJMXValue(String domain, String mbeanName, ArrayList<String> attributes) {
-    return null;
+  public Object getJMXValue(String mbeanStringName, String attribute) {
+
+    ObjectName mbeanName = null;
+    try {
+      mbeanName = new ObjectName(mbeanStringName);
+    } catch (MalformedObjectNameException e) {
+      e.printStackTrace();
+    }
+    Object value = null;
+      try {
+        value = mbsc.getAttribute(mbeanName, attribute);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    System.out.println(value.toString());
+    return value;
   }
 }

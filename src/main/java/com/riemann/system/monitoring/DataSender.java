@@ -61,7 +61,11 @@ public class DataSender {
 		riemannCommunicator.send("loadavg", procP.gatherLoadAvg().getOneMinuteAvg(), "loadavg");
 
 		for (JMXData jmxData : jmxDataList) {
-			riemannCommunicator.send(jmxData.getName(), Double.parseDouble(jmxData.getValue().toString()), jmxData.getTagsAsString());
+      Iterator iterator = jmxData.getValues().values().iterator();
+      while (iterator.hasNext()) {
+        Object value = iterator.next();
+        riemannCommunicator.send(jmxData.getName(), (Double) value, jmxData.getTagsAsString());
+      }
 		}
 	}
 
@@ -98,7 +102,11 @@ public class DataSender {
     List<JMXData> jmxDataList = Utils.getJmxDataList(DEFAULT_DATA_FILES);
 
     for (JMXData jmxData : jmxDataList) {
-      System.out.println("Name: " + jmxData.getName() + "Value: " + jmxData.getValue().toString());
+      Iterator iterator = jmxData.getValues().values().iterator();
+      while (iterator.hasNext()) {
+        Object value = iterator.next();
+        System.out.println("Name: " + jmxData.getName() + "Value: " + (Double) value);
+      }
     }
 	}
 }

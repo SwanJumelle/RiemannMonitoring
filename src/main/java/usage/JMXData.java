@@ -1,6 +1,8 @@
 package usage;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by antoinelavail on 11/08/14.
@@ -13,41 +15,37 @@ public class JMXData {
 
   private String objectName;
 
-  private List<String> attributes;
-
   private List<String> tags;
 
-  private Object value;
+  /**
+   * @key: attribute name
+   * @value: metric value
+   */
+  private Map<String, Object> values;
 
   /**
    * Build a JMXData from a
    */
-  public JMXData(String name, String service, String objectName) {
-
+  public JMXData(String name, String objectName) {
+    this.name = name;
+    this.objectName = objectName;
+    this.values = new HashMap<String, Object>();
   }
 
   public String getName() {
     return name;
   }
 
-  public String getService() {
-    return service;
-  }
-
   public String getObjectName() {
     return objectName;
   }
 
-  public void addAttribute(String attr) {
-    attributes.add(attr);
+  public void addValue(String attr, Object value) {
+    values.put(attr, value);
   }
 
-  public List<String> getAttributes() {
-    return attributes;
-  }
-
-  public void setAttributes(List<String> attrs) {
-    attributes = attrs;
+  public Map<String, Object> getValues() {
+    return values;
   }
 
   public void addTag(String tag) {
@@ -66,11 +64,4 @@ public class JMXData {
     return tags.toString();
   }
 
-  public Object getValue() {
-    return value;
-  }
-
-  public void setValue(Object val) {
-    value = val;
-  }
 }
