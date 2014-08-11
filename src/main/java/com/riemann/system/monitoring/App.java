@@ -11,7 +11,7 @@ import communication.RiemannJmx;
  */
 public class App 
 {
-	private static final String configFilePath = "src/main/jmx_config/";
+	private static final String configFilePath = "resources/default/";
 	private static final String defaultConfig = "defaultConfig.yaml";
 
 	public static void main( String[] args )
@@ -28,7 +28,6 @@ public class App
 			riemannHost = "10.42.2.6";
 			riemannPort = 5555;
 		}
-    System.out.println("COUCOU");
     //communication between the java process and riemann
 		RiemannCommunicator riemannCommunicator = new RiemannCommunicator(riemannHost,riemannPort);
 		
@@ -37,8 +36,6 @@ public class App
 		//rJmx.gatherStats();
 
 		DataSender dataSender = new DataSender(riemannCommunicator);
-
-    dataSender.hackJMX();
 		
 		/*while(true){
 			//dataSender.printData();

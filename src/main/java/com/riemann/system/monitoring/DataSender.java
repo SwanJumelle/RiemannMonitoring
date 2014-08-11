@@ -21,7 +21,7 @@ public class DataSender {
 
 	private static final int SEND_INTERVAL_TIME = 2000;
 
-	private static final String DEFAULT_DATA_FILES = "src/main/jmx_config/";
+	private static final String DEFAULT_DATA_FILES = "resources/data/";
 
 	private RiemannCommunicator riemannCommunicator;
 
