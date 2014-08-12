@@ -1,6 +1,7 @@
 package communication;
 
 import javax.management.*;
+import javax.management.openmbean.CompositeDataSupport;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
@@ -40,8 +41,15 @@ public class JMXClient {
       for (String attr : attributes) {
         Float valf = 0.0f;
         for (String strMBean : matchedMBeans) {
-          Object val = mbsc.getAttribute(new ObjectName(strMBean),attr);
-          valf += Float.valueOf(val.toString());
+          // Special case for memory usage
+          if (attr.equals("HeapMemoryUsage") || attr.equals("NonHeapMemoryUsage")) {
+            CompositeDataSupport memoryUsage = (CompositeDataSupport) mbsc.getAttribute(new ObjectName(strMBean),attr);
+            valf += Float.valueOf(memoryUsage.get("used").toString());
+          }
+          else {
+            Object val = mbsc.getAttribute(new ObjectName(strMBean), attr);
+            valf += Float.valueOf(val.toString());
+          }
         }
         jmxValues.put(attr, valf);
       }

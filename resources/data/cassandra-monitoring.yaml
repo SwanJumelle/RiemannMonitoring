@@ -102,3 +102,13 @@ queries :
     obj         : "org.apache.cassandra.metrics:type=Keyspace,keyspace=*,name=ReadLatency"
     attr        : [ OneMinuteRate, FiveMinuteRate, FifteenMinuteRate ]
     tags        : [ cassandra , Keyspace, PendingTasks ]
+
+-   name        : "java.lang.Threading"
+    obj         : "java.lang:type=Threading"
+    attr        : [ ThreadCount ]
+    tags        : [ cassandra , general , ThreadCount ]
+
+-   name        : "java.lang.ClassLoading"
+    obj         : "java.lang:type=ClassLoading"
+    attr        : [ LoadedClassCount ]
+    tags        : [ cassandra , general , LoadedClassCount ]
