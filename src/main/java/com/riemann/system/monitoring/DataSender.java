@@ -15,7 +15,7 @@ import communication.RiemannCommunicator;
 
 public class DataSender {
 
-	private static final int SEND_INTERVAL_TIME = 2000;
+	private static final int SEND_INTERVAL_TIME = 750;
 
 	private static final String DEFAULT_DATA_FILES = "resources/data/";
 
