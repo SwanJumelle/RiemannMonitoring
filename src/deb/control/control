@@ -1,0 +1,8 @@
+Package: vero-system-monitoring
+Version: 0.0.1
+Section: monitoring
+Priority: optional
+Architecture: all
+Maintainer: Ojingo Labs LLC
+Description: A monitoring tool for Vero system
+Distribution: development
