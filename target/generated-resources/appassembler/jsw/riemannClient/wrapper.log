@@ -1,3 +1,0 @@
-FATAL  | wrapper  | 2014/08/08 16:03:14 | ERROR: Could not write pid file /home/user/Documents/Ojingo/Swan/monitoring/target/generated-resources/appassembler/jsw/riemannClient/bin/../logs/riemannClient.pid: No such file or directory
-FATAL  | wrapper  | 2014/08/08 16:05:13 | ERROR: Could not write pid file /home/user/Documents/Ojingo/Swan/monitoring/target/generated-resources/appassembler/jsw/riemannClient/bin/../logs/riemannClient.pid: No such file or directory
-FATAL  | wrapper  | 2014/08/08 16:32:59 | ERROR: Could not write pid file /home/user/Documents/Ojingo/Swan/monitoring/target/generated-resources/appassembler/jsw/riemannClient/bin/../logs/riemannClient.pid: No such file or directory
