@@ -17,7 +17,7 @@ public class DataSender {
 
 	private static final int SEND_INTERVAL_TIME = 500;
 
-	private static final String DEFAULT_DATA_FILES = "resources/data/";
+	private static final String DEFAULT_DATA_FILES = "/etc/vero-system-monitoring/";
 
 	private RiemannCommunicator riemannCommunicator;
 

@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 
 public class Main
 {
-	private static final String CONFIG_FILE_PATH = "resources/default/";
-	private static final String DEFAULT_CONFIG = "default.yaml";
+	private static final String CONFIG_FILE_PATH = "/etc/default/";
+	private static final String DEFAULT_CONFIG = "vero-system-monitoring";
   private static final String DEFAULT_HOST = "10.42.2.1";
   private static final int DEFAULT_PORT = 5555;
   private static final int WAIT_TIME = 5000;

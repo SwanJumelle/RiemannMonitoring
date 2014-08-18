@@ -23,7 +23,7 @@
 # THE SOFTWARE.
 
 jmx : 
-    host : 127.0.0.1
+    host : testdev-db-00
     port : 7199
 
 queries :

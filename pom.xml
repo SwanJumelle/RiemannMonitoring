@@ -182,6 +182,11 @@
                                         <prefix>/var/lib/${daemon.name}/logs</prefix>
                                     </mapper>
                                 </data>
+                                <data>
+                                    <type>link</type>
+                                    <linkName>/etc/init.d/${daemon.name}</linkName>
+                                    <linkTarget>/var/lib/${daemon.name}/bin/${daemon.name}</linkTarget>
+                                </data>
                             </dataSet>
                         </configuration>
                     </execution>
