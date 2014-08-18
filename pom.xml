@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>vero</groupId>
-	<artifactId>monitoring</artifactId>
+	<artifactId>vero-system-monitoring</artifactId>
 	<version>0.0.1</version>
     <name>Vero System Monitoring</name>
 	<packaging>jar</packaging>
